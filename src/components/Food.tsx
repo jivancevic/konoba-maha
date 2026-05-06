@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import type { Language } from '@/types';
 import { translations } from '@/lib/translations';
 import Reveal from '@/components/Reveal';
@@ -14,11 +15,6 @@ interface FoodProps {
 export default function Food({ lang }: FoodProps) {
   const t = translations[lang].food;
   const p = t.peka;
-
-  const scrollToMenu = () => {
-    const el = document.getElementById('menu');
-    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
-  };
 
   return (
     <section id="food" style={{ background: '#EFEFEA', padding: 'clamp(5rem,10vw,9rem) 0' }}>
@@ -39,7 +35,7 @@ export default function Food({ lang }: FoodProps) {
             <Reveal delay={250}><BodyText>{t.p2}</BodyText></Reveal>
             <Reveal delay={350}>
               <div className="flex gap-4 flex-wrap mt-8">
-                <CTAButton onClick={scrollToMenu}>{t.cta}</CTAButton>
+                <CTAButton href="/menu">{t.cta}</CTAButton>
               </div>
             </Reveal>
           </div>
@@ -200,8 +196,15 @@ export function CTAButton({
   };
 
   if (href) {
+    if (href.startsWith('/')) {
+      return (
+        <Link href={href} onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} style={style}>
+          {children}
+        </Link>
+      );
+    }
     return (
-      <a href={href} onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} style={style}>
+      <a href={href} target="_blank" rel="noopener noreferrer" onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} style={style}>
         {children}
       </a>
     );

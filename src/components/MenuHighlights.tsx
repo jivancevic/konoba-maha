@@ -51,7 +51,7 @@ export default function MenuHighlights({ lang }: MenuHighlightsProps) {
           }}
         >
           {highlights.map((item, i) => (
-            <Reveal key={i} delay={i * 50}>
+            <Reveal key={i} delay={i * 50} style={{ height: '100%' }}>
               <HighlightCard item={item} />
             </Reveal>
           ))}
@@ -101,7 +101,7 @@ function HighlightCard({ item }: { item: HighlightItem }) {
     <div
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
-      className="p-7 transition-colors duration-200 cursor-default"
+      className="p-7 transition-colors duration-200 cursor-default h-full"
       style={{ background: hov ? '#EFEFEA' : '#F5F5F0' }}
     >
       <div

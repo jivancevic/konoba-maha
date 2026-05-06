@@ -141,8 +141,8 @@ export default function MenuPage() {
               }}
             >
               {lang === 'en'
-                ? 'Local ingredients, traditional methods, contemporary craft — all prices in €.'
-                : 'Lokalni sastojci, tradicionalne metode, suvremeni pristup — sve cijene u €.'}
+                ? 'Local ingredients, traditional methods, contemporary craft.'
+                : 'Lokalni sastojci, tradicionalne metode, suvremeni pristup.'}
             </p>
           </Reveal>
         </div>

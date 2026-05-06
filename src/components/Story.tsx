@@ -4,6 +4,7 @@ import Image from 'next/image';
 import type { Language } from '@/types';
 import { translations } from '@/lib/translations';
 import Reveal from '@/components/Reveal';
+import StoryCarousel from '@/components/StoryCarousel';
 
 interface StoryProps {
   lang: Language;
@@ -73,43 +74,55 @@ export default function Story({ lang }: StoryProps) {
             </Reveal>
           </div>
 
-          {/* Right — 3-image mosaic */}
+          {/* Right — editorial mosaic: family left, archive pair + netflix right */}
           <Reveal delay={100} direction="right">
-            <div
-              className="grid gap-4"
-              style={{ gridTemplateColumns: '1.15fr 1fr', gridTemplateRows: 'auto auto' }}
-            >
-              {/* Tall left image spanning 2 rows */}
-              <div className="relative overflow-hidden" style={{ gridRow: '1 / span 2', minHeight: '480px' }}>
-                <Image
-                  src="/images/outside.jpg"
-                  alt="Konoba Maha terrace"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 30vw"
-                  className="object-cover"
-                />
-              </div>
-              {/* Top-right */}
-              <div className="relative overflow-hidden" style={{ aspectRatio: '3/4' }}>
+            <div className="grid gap-3 md:gap-4" style={{ gridTemplateColumns: '1fr 1fr' }}>
+
+              {/* Left: family portrait — stretches to match right column height */}
+              <div className="relative overflow-hidden" style={{ minHeight: '120px' }}>
                 <Image
                   src="/images/family.jpg"
                   alt="The Maha family preparing food"
                   fill
-                  sizes="(max-width: 768px) 100vw, 20vw"
+                  sizes="(max-width: 768px) 50vw, 20vw"
                   className="object-cover object-top"
                 />
               </div>
-              {/* Bottom-right */}
-              <div className="relative overflow-hidden" style={{ aspectRatio: '3/4' }}>
-                <Image
-                  src="/images/netflix.jpg"
-                  alt="Somebody Feed Phil — Netflix"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 20vw"
-                  className="object-cover"
-                  style={{ objectPosition: 'center 20%' }}
-                />
+
+              {/* Right: archive pair on top, Netflix below */}
+              <div className="flex flex-col gap-3 md:gap-4">
+                <div className="grid grid-cols-2 gap-3 md:gap-4">
+                  <div className="relative overflow-hidden" style={{ aspectRatio: '4/5' }}>
+                    <Image
+                      src="/images/old-kitchen.jpg"
+                      alt="Konoba Maha kitchen — the early years"
+                      fill
+                      sizes="(max-width: 768px) 25vw, 10vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="relative overflow-hidden" style={{ aspectRatio: '4/5' }}>
+                    <Image
+                      src="/images/beginning.jpg"
+                      alt="The beginning — Konoba Maha 2003"
+                      fill
+                      sizes="(max-width: 768px) 25vw, 10vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="relative overflow-hidden" style={{ aspectRatio: '4/3' }}>
+                  <Image
+                    src="/images/netflix.jpg"
+                    alt="Somebody Feed Phil — Netflix visit to Konoba Maha"
+                    fill
+                    sizes="(max-width: 768px) 50vw, 20vw"
+                    className="object-cover"
+                    style={{ objectPosition: 'center 30%' }}
+                  />
+                </div>
               </div>
+
             </div>
           </Reveal>
         </div>
@@ -139,7 +152,13 @@ export default function Story({ lang }: StoryProps) {
             {t.quote}
           </blockquote>
         </Reveal>
+
       </div>
+
+      {/* Photo carousel — full viewport width */}
+      <Reveal delay={100} style={{ marginTop: 'clamp(3rem,6vw,5rem)' }}>
+        <StoryCarousel />
+      </Reveal>
     </section>
   );
 }

@@ -25,7 +25,7 @@ export default function Hero({ lang }: HeroProps) {
   };
 
   return (
-    <section id="hero" className="relative h-screen min-h-[680px] flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative h-screen min-h-[680px] overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <Image
@@ -42,7 +42,7 @@ export default function Hero({ lang }: HeroProps) {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to bottom, rgba(10,7,4,0.72) 0%, rgba(14,10,6,0.68) 35%, rgba(12,8,5,0.75) 65%, rgba(8,5,3,0.82) 100%)',
+              'linear-gradient(to bottom, rgba(10,7,4,0.50) 0%, rgba(14,10,6,0.46) 35%, rgba(12,8,5,0.54) 65%, rgba(8,5,3,0.62) 100%)',
           }}
         />
         {/* Center vignette */}
@@ -70,25 +70,19 @@ export default function Hero({ lang }: HeroProps) {
             filter: 'blur(80px)',
           }}
         />
-        {/* Horizontal light rule */}
-        <div
-          className="absolute left-0 right-0 h-px"
-          style={{
-            top: '45%',
-            background:
-              'linear-gradient(90deg, transparent, rgba(180,150,100,0.12) 30%, rgba(180,150,100,0.08) 70%, transparent)',
-          }}
-        />
       </div>
 
-      {/* CTAs */}
+      {/* CTAs — anchored at 20% from the bottom (~75% from the top) */}
       <div
-        className="relative z-[2] text-center flex flex-col items-center"
-        style={{ maxWidth: '860px', padding: '0 2rem' }}
+        className="absolute z-[2] flex justify-center"
+        style={{ bottom: '25%', left: 0, right: 0 }}
       >
         <div
           className="flex gap-4 flex-wrap justify-center"
           style={{
+            padding: '0 2rem',
+            maxWidth: '860px',
+            width: '100%',
             opacity: loaded ? 1 : 0,
             transform: loaded ? 'none' : 'translateY(20px)',
             transition: 'opacity 0.9s ease 0.6s, transform 0.9s ease 0.6s',

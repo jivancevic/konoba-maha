@@ -14,11 +14,6 @@ interface WeddingsProps {
 export default function Weddings({ lang }: WeddingsProps) {
   const t = translations[lang].weddings;
 
-  const scrollToContact = () => {
-    const el = document.getElementById('contact');
-    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
-  };
-
   return (
     <section id="weddings" style={{ background: '#1A1A1A', padding: 'clamp(5rem,10vw,9rem) 0' }}>
       <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 clamp(1.5rem,5vw,4rem)' }}>
@@ -48,7 +43,8 @@ export default function Weddings({ lang }: WeddingsProps) {
                       alt="Wedding ceremony bench — Korčula"
                       fill
                       sizes="(max-width: 768px) 50vw, 25vw"
-                      className="object-cover object-top"
+                      className="object-cover"
+                      style={{ objectPosition: 'center 20%' }}
                     />
                   </div>
                   <div className="relative overflow-hidden" style={{ aspectRatio: '1' }}>
@@ -128,10 +124,7 @@ export default function Weddings({ lang }: WeddingsProps) {
 
             {/* CTAs */}
             <Reveal delay={400}>
-              <div className="flex flex-wrap gap-4">
-                <CTAButton onClick={scrollToContact} light>{t.cta}</CTAButton>
-                <CTAButton href={t.brochureFile} light>{t.brochure}</CTAButton>
-              </div>
+              <CTAButton href={t.brochureFile} light>{t.brochure}</CTAButton>
             </Reveal>
           </div>
         </div>
