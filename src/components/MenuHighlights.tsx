@@ -61,7 +61,7 @@ export default function MenuHighlights({ lang }: MenuHighlightsProps) {
         <Reveal delay={100}>
           <div className="text-center">
             <Link
-              href="/menu"
+              href={`/${lang}/menu`}
               className="inline-flex items-center gap-3 no-underline transition-opacity duration-300 hover:opacity-80"
               style={{
                 background: '#1A1A1A',

@@ -91,7 +91,7 @@ export default function Hero({ lang }: HeroProps) {
           <HeroBtn primary href="https://bookmeatable.com/restaurants/konoba-maha-8" newTab>
             {t.cta}
           </HeroBtn>
-          <HeroBtn href="/menu">{t.ctaMenu}</HeroBtn>
+          <HeroBtn href={`/${lang}/menu`}>{t.ctaMenu}</HeroBtn>
           <HeroBtn onClick={() => scrollTo('story')}>{t.ctaDiscover} ↓</HeroBtn>
         </div>
       </div>

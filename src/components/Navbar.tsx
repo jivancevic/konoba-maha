@@ -1,17 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import type { Language } from '@/types';
 import { translations } from '@/lib/translations';
 
 interface NavbarProps {
   lang: Language;
-  setLang: (lang: Language) => void;
   activeSection: string;
 }
 
-export default function Navbar({ lang, setLang, activeSection }: NavbarProps) {
+export default function Navbar({ lang, activeSection }: NavbarProps) {
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const t = translations[lang].nav;
@@ -95,7 +96,7 @@ export default function Navbar({ lang, setLang, activeSection }: NavbarProps) {
         <div className="flex items-center gap-6">
           {/* Language toggle */}
           <button
-            onClick={() => setLang(lang === 'en' ? 'hr' : 'en')}
+            onClick={() => router.push(`/${lang === 'en' ? 'hr' : 'en'}`)}
             className="bg-transparent cursor-pointer transition-all duration-300"
             style={{
               border: `1px solid ${scrolled ? 'rgba(26,26,26,0.2)' : 'rgba(245,245,240,0.4)'}`,
@@ -218,7 +219,7 @@ export default function Navbar({ lang, setLang, activeSection }: NavbarProps) {
 
         <div className="mt-auto flex flex-col gap-4">
           <button
-            onClick={() => { setLang(lang === 'en' ? 'hr' : 'en'); setMenuOpen(false); }}
+            onClick={() => { router.push(`/${lang === 'en' ? 'hr' : 'en'}`); setMenuOpen(false); }}
             className="self-start cursor-pointer bg-transparent"
             style={{
               border: '1px solid rgba(26,26,26,0.2)',

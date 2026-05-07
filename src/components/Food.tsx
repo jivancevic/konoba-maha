@@ -35,7 +35,7 @@ export default function Food({ lang }: FoodProps) {
             <Reveal delay={250}><BodyText>{t.p2}</BodyText></Reveal>
             <Reveal delay={350}>
               <div className="flex gap-4 flex-wrap mt-8">
-                <CTAButton href="/menu">{t.cta}</CTAButton>
+                <CTAButton href={`/${lang}/menu`}>{t.cta}</CTAButton>
               </div>
             </Reveal>
           </div>

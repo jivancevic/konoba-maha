@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Language } from '@/types';
@@ -11,8 +12,8 @@ import WineTab from '@/components/menu/WineTab';
 import TastingTab from '@/components/menu/TastingTab';
 import GroupTab from '@/components/menu/GroupTab';
 
-export default function MenuPage() {
-  const [lang, setLang] = useState<Language>('en');
+export default function MenuClient({ lang }: { lang: Language }) {
+  const router = useRouter();
   const [tab, setTab] = useState<number>(0);
   const [scrolled, setScrolled] = useState(false);
   const subNavRef = useRef<HTMLDivElement>(null);
@@ -24,7 +25,6 @@ export default function MenuPage() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
-  /* Scroll active tab button into view */
   useEffect(() => {
     if (subNavRef.current) {
       const btns = subNavRef.current.querySelectorAll<HTMLButtonElement>('.subnav-btn');
@@ -53,7 +53,7 @@ export default function MenuPage() {
         }}
       >
         <Link
-          href="/"
+          href={`/${lang}`}
           className="no-underline flex items-center gap-2 font-medium"
           style={{
             fontFamily: 'var(--font-montserrat-sans)',
@@ -66,7 +66,7 @@ export default function MenuPage() {
         </Link>
 
         <div className="flex items-center gap-4">
-          <Link href="/" className="no-underline flex items-center">
+          <Link href={`/${lang}`} className="no-underline flex items-center">
             <Image
               src="/images/maha-logo-transparent.png"
               alt="Konoba Maha"
@@ -80,7 +80,7 @@ export default function MenuPage() {
             />
           </Link>
           <button
-            onClick={() => setLang((l) => (l === 'en' ? 'hr' : 'en'))}
+            onClick={() => router.push(`/${lang === 'en' ? 'hr' : 'en'}/menu`)}
             className="cursor-pointer bg-transparent font-semibold"
             style={{
               border: '1px solid rgba(26,26,26,0.2)',
@@ -224,7 +224,7 @@ export default function MenuPage() {
               © 2026 Konoba Maha. All rights reserved.
             </span>
             <Link
-              href="/"
+              href={`/${lang}`}
               className="no-underline font-medium"
               style={{
                 fontFamily: 'var(--font-montserrat-sans)',

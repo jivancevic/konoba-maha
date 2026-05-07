@@ -12,11 +12,9 @@ import Contact from '@/components/Contact';
 
 const SECTIONS = ['hero', 'story', 'food', 'menu', 'weddings', 'contact'] as const;
 
-export default function Home() {
-  const [lang, setLang] = useState<Language>('en');
+export default function HomeClient({ lang }: { lang: Language }) {
   const [activeSection, setActiveSection] = useState<string>('hero');
 
-  /* Track active section on scroll */
   useEffect(() => {
     const onScroll = () => {
       let current = 'hero';
@@ -32,7 +30,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar lang={lang} setLang={setLang} activeSection={activeSection} />
+      <Navbar lang={lang} activeSection={activeSection} />
       <main>
         <Hero lang={lang} />
         <Story lang={lang} />
