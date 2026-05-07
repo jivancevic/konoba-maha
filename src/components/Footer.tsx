@@ -16,9 +16,9 @@ export default function Footer({ lang }: FooterProps) {
       className="mt-[clamp(4rem,8vw,7rem)]"
       style={{ borderTop: '1px solid rgba(26,26,26,0.1)', padding: '2.5rem clamp(1.5rem,5vw,4rem)' }}
     >
+      <div style={{ maxWidth: '1240px', margin: '0 auto' }}>
       <div
         className="flex justify-between items-center flex-wrap gap-4"
-        style={{ maxWidth: '1240px', margin: '0 auto' }}
       >
         <Image
           src="/images/maha-logo-transparent.png"
@@ -75,6 +75,27 @@ export default function Footer({ lang }: FooterProps) {
             Josip Ivančević
           </a>
         </span>
+      </div>
+      <p
+        className="mt-4 text-center"
+        style={{
+          fontFamily: 'var(--font-montserrat-sans)',
+          fontSize: '0.55rem',
+          letterSpacing: '0.08em',
+          color: '#B0ADA9',
+        }}
+      >
+        {lang === 'hr' ? 'Ova stranica koristi Google Maps.' : 'This site uses Google Maps.'}{' '}
+        <a
+          href="https://policies.google.com/privacy"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="no-underline"
+          style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: '2px' }}
+        >
+          {lang === 'hr' ? 'Googleova pravila privatnosti' : "Google's Privacy Policy"}
+        </a>
+      </p>
       </div>
     </footer>
   );
