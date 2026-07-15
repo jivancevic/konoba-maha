@@ -78,6 +78,8 @@ export interface WeddingsTranslations {
   sub: string;
   features: WeddingFeature[];
   cta: string;
+  planner: string;
+  plannerUrl: string;
   brochure: string;
   brochureFile: string;
 }
