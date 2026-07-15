@@ -171,18 +171,26 @@ export function CTAButton({
   onClick,
   href,
   light,
+  primary,
 }: {
   children: React.ReactNode;
   onClick?: () => void;
   href?: string;
   light?: boolean;
+  primary?: boolean;
 }) {
   const [hov, setHov] = useState(false);
 
+  // Base outline button inverts to filled on hover. `primary` swaps that: filled
+  // by default, outline on hover — to emphasise one CTA among several.
+  const accent = light ? '#F5F5F0' : '#1A1A1A';
+  const contrast = light ? '#1A1A1A' : '#F5F5F0';
+  const filled = primary ? !hov : hov;
+
   const style: React.CSSProperties = {
-    background: light ? (hov ? '#F5F5F0' : 'transparent') : hov ? '#1A1A1A' : 'transparent',
+    background: filled ? accent : 'transparent',
     border: light ? '1px solid rgba(245,245,240,0.5)' : '1px solid #1A1A1A',
-    color: light ? (hov ? '#1A1A1A' : '#F5F5F0') : hov ? '#F5F5F0' : '#1A1A1A',
+    color: filled ? contrast : accent,
     fontFamily: 'var(--font-montserrat-sans)',
     fontSize: '0.62rem',
     letterSpacing: '0.2em',

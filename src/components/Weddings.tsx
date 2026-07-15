@@ -122,9 +122,12 @@ export default function Weddings({ lang }: WeddingsProps) {
               ))}
             </div>
 
-            {/* CTAs */}
+            {/* CTAs — primary: hand off to Valnea (the planner brand); secondary: venue brochure */}
             <Reveal delay={400}>
-              <CTAButton href={t.brochureFile} light>{t.brochure}</CTAButton>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <CTAButton href={t.plannerUrl} light primary>{t.planner}</CTAButton>
+                <CTAButton href={t.brochureFile} light>{t.brochure}</CTAButton>
+              </div>
             </Reveal>
           </div>
         </div>
