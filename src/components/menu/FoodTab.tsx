@@ -2,7 +2,10 @@
 
 import { useState } from 'react';
 import type { FoodSection, DishItem, DishTag } from '@/types';
+import { prices } from '@/lib/prices';
+import { formatPrice, unitLabel } from '@/lib/formatPrice';
 import Reveal from '@/components/Reveal';
+import AnchorPrice from '@/components/menu/AnchorPrice';
 
 interface FoodTabProps {
   sections: FoodSection[];
@@ -77,11 +80,15 @@ export default function FoodTab({ sections }: FoodTabProps) {
                         </div>
                       )}
                     </div>
-                    <div
-                      className="font-semibold flex-shrink-0"
-                      style={{ fontFamily: 'var(--font-montserrat-sans)', fontSize: '0.88rem', color: '#9B8060' }}
-                    >
-                      {item.price}
+                    <div className="flex-shrink-0 text-right">
+                      <div
+                        className="font-semibold"
+                        style={{ fontFamily: 'var(--font-montserrat-sans)', fontSize: '0.88rem', color: '#9B8060' }}
+                      >
+                        {formatPrice(prices[item.priceId].current)}
+                        {item.unit && ` ${unitLabel(item.unit)}`}
+                      </div>
+                      <AnchorPrice amount={prices[item.priceId].anchor} />
                     </div>
                   </div>
                 ))}
@@ -147,11 +154,15 @@ function DishRow({ item, last }: { item: DishItem; last: boolean }) {
           </div>
         )}
       </div>
-      <div
-        className="font-semibold flex-shrink-0 pt-[2px]"
-        style={{ fontFamily: 'var(--font-montserrat-sans)', fontSize: '0.88rem', color: '#1A1A1A' }}
-      >
-        {item.price}
+      <div className="flex-shrink-0 pt-[2px] text-right">
+        <div
+          className="font-semibold"
+          style={{ fontFamily: 'var(--font-montserrat-sans)', fontSize: '0.88rem', color: '#1A1A1A' }}
+        >
+          {formatPrice(prices[item.priceId].current)}
+          {item.unit && ` ${unitLabel(item.unit)}`}
+        </div>
+        <AnchorPrice amount={prices[item.priceId].anchor} />
       </div>
     </div>
   );

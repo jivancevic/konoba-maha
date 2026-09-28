@@ -126,16 +126,6 @@ function HighlightCard({ item }: { item: HighlightItem }) {
         >
           {item.name}
         </div>
-        <div
-          className="font-semibold flex-shrink-0"
-          style={{
-            fontFamily: 'var(--font-montserrat-sans)',
-            fontSize: '0.85rem',
-            color: '#1A1A1A',
-          }}
-        >
-          {item.price}
-        </div>
       </div>
       {item.desc && (
         <div

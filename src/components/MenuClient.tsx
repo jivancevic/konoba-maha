@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { Language } from '@/types';
 import { menuPageData } from '@/lib/menuData';
+import { translations } from '@/lib/translations';
 import Reveal from '@/components/Reveal';
 import FoodTab from '@/components/menu/FoodTab';
 import WineTab from '@/components/menu/WineTab';
@@ -18,6 +19,7 @@ export default function MenuClient({ lang }: { lang: Language }) {
   const [scrolled, setScrolled] = useState(false);
   const subNavRef = useRef<HTMLDivElement>(null);
   const d = menuPageData[lang];
+  const t = translations[lang];
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50);
@@ -194,6 +196,24 @@ export default function MenuClient({ lang }: { lang: Language }) {
           {tabContent[tab]}
         </div>
 
+        {/* Anchor-price footnote — required next to the prices (NN 101/2026) */}
+        <p
+          className="text-center"
+          style={{
+            maxWidth: 820,
+            margin: 'clamp(1.5rem,3vw,2.5rem) auto 0',
+            padding: '0 clamp(1.5rem,5vw,4rem) clamp(3rem,5vw,4rem)',
+            fontFamily: 'var(--font-montserrat-sans)',
+            fontSize: '0.62rem',
+            fontWeight: 300,
+            lineHeight: 1.8,
+            letterSpacing: '0.03em',
+            color: '#9B9390',
+          }}
+        >
+          {t.menu.anchorNote}
+        </p>
+
         {/* Footer */}
         <footer
           style={{
@@ -223,18 +243,32 @@ export default function MenuClient({ lang }: { lang: Language }) {
             >
               © 2026 Konoba Maha. All rights reserved.
             </span>
-            <Link
-              href={`/${lang}`}
-              className="no-underline font-medium"
-              style={{
-                fontFamily: 'var(--font-montserrat-sans)',
-                fontSize: '0.6rem',
-                letterSpacing: '0.15em',
-                color: '#9B8060',
-              }}
-            >
-              {d.back}
-            </Link>
+            <div className="flex items-center gap-6 flex-wrap">
+              <Link
+                href={`/${lang}/cjenik`}
+                className="no-underline font-medium"
+                style={{
+                  fontFamily: 'var(--font-montserrat-sans)',
+                  fontSize: '0.6rem',
+                  letterSpacing: '0.15em',
+                  color: '#9B8060',
+                }}
+              >
+                {t.footer.priceList}
+              </Link>
+              <Link
+                href={`/${lang}`}
+                className="no-underline font-medium"
+                style={{
+                  fontFamily: 'var(--font-montserrat-sans)',
+                  fontSize: '0.6rem',
+                  letterSpacing: '0.15em',
+                  color: '#9B8060',
+                }}
+              >
+                {d.back}
+              </Link>
+            </div>
           </div>
         </footer>
       </div>

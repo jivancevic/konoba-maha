@@ -1,3 +1,5 @@
+import type { PriceId } from '@/lib/prices';
+
 export type Language = 'en' | 'hr';
 
 /* ── Nav ── */
@@ -63,6 +65,7 @@ export interface MenuTranslations {
   subtext: string;
   cta: string;
   ctaSub: string;
+  anchorNote: string;
 }
 
 /* ── Weddings ── */
@@ -107,11 +110,26 @@ export interface ContactTranslations {
   form: ContactFormTranslations;
 }
 
+/* ── Price list (/cjenik) ── */
+export interface PriceListTranslations {
+  title: string;
+  label: string;
+  heading: string;
+  intro: string;
+  current: string;
+  published: string;
+  sequence: string;
+  download: string;
+  back: string;
+  empty: string;
+}
+
 /* ── Footer ── */
 export interface FooterTranslations {
   partners: string;
   rights: string;
   location: string;
+  priceList: string;
 }
 
 /* ── Root ── */
@@ -123,6 +141,7 @@ export interface Translations {
   menu: MenuTranslations;
   weddings: WeddingsTranslations;
   contact: ContactTranslations;
+  priceList: PriceListTranslations;
   footer: FooterTranslations;
 }
 
@@ -130,17 +149,20 @@ export interface Translations {
 export interface HighlightItem {
   name: string;
   desc: string;
-  price: string;
   tag: string;
 }
 
 /* ── Full menu ── */
 export type DishTag = 'vegetarian' | 'local' | 'chef';
 
+/** Per person / per kilogram — the peka prices are quoted per unit. */
+export type PriceUnit = 'pp' | 'kg';
+
 export interface DishItem {
   name: string;
   desc?: string;
-  price: string;
+  priceId: PriceId;
+  unit?: PriceUnit;
   tags?: DishTag[];
 }
 
@@ -154,8 +176,8 @@ export interface FoodSection {
 
 export interface WineItem {
   name: string;
-  glass?: string;
-  bottle: string;
+  glassId?: PriceId;
+  bottleId: PriceId;
   tag?: string;
 }
 
@@ -172,7 +194,7 @@ export interface TastingCourse {
 
 export interface PricePoint {
   label: string;
-  value: string;
+  priceId: PriceId;
   sub: string;
 }
 

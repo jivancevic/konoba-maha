@@ -19,16 +19,17 @@ No test framework configured.
 - **Tailwind CSS v4** — `@import "tailwindcss"` + `@theme inline {}`, not v3 directives
 - **Framer Motion** — scroll-reveal via `src/components/Reveal.tsx`
 - **Lucide React** — icons in Contact
+- **`allowImportingTsExtensions`** is on so `scripts/*.ts` run under Node natively (no build step); lib files those scripts import (`lib/cjenik.ts`, `lib/prices.ts`, `lib/menuData.ts`) use explicit relative `.ts` specifiers rather than the `@/` alias, which Node cannot resolve
 
 ## Architecture
 
 `src/` only. Alias: `@/*` → `./src/*`.
 
-**Pages:** `app/page.tsx` (landing, `lang`+`activeSection`), `app/menu/page.tsx` (menu, `lang`+`tab`), `app/layout.tsx` (fonts)
+**Pages:** `app/[lang]/page.tsx` (landing, `lang`+`activeSection`), `app/[lang]/menu/page.tsx` (menu, `lang`+`tab`), `app/[lang]/cjenik/page.tsx` (price list), `app/layout.tsx` (fonts)
 
-**Components:** `Navbar`, `Hero`, `Story` (+ `SectionLabel`/`SectionHeading`/`BodyText`), `Food` (+ `CTAButton`), `MenuHighlights`, `Weddings`, `Contact` (+ `Footer`), `Reveal`; menu tabs: `menu/FoodTab`, `menu/WineTab`, `menu/TastingTab`, `menu/GroupTab`
+**Components:** `Navbar`, `Hero`, `Story` (+ `SectionLabel`/`SectionHeading`/`BodyText`), `Food` (+ `CTAButton`), `MenuHighlights`, `Weddings`, `Contact` (+ `Footer`), `Reveal`; menu tabs: `menu/FoodTab`, `menu/WineTab`, `menu/TastingTab`, `menu/GroupTab` (+ `menu/AnchorPrice`)
 
-**Data:** `lib/translations.ts` (EN/HR copy), `lib/menuData.ts` (menu + `getHighlights`), `types/index.ts`
+**Data:** `lib/prices.ts` (every amount + anchor price — the single source of truth), `lib/translations.ts` (EN/HR copy), `lib/menuData.ts` (menu + `getHighlights`, references Prices by id), `lib/cjenik.ts` (machine-readable price list CSV), `types/index.ts`
 
 **Assets:** `public/images/`, `public/documents/` (EN + HR wedding brochures)
 

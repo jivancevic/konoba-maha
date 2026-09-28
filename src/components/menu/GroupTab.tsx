@@ -1,7 +1,10 @@
 'use client';
 
 import type { GroupMenu } from '@/types';
+import { prices } from '@/lib/prices';
+import { formatPrice } from '@/lib/formatPrice';
 import Reveal from '@/components/Reveal';
+import AnchorPrice from '@/components/menu/AnchorPrice';
 
 interface GroupTabProps {
   data: GroupMenu;
@@ -135,7 +138,7 @@ export default function GroupTab({ data }: GroupTabProps) {
                   marginBottom: '0.25rem',
                 }}
               >
-                {p.value}
+                {formatPrice(prices[p.priceId].current, { whole: true })}
               </div>
               <div
                 style={{
@@ -147,6 +150,7 @@ export default function GroupTab({ data }: GroupTabProps) {
               >
                 {p.sub}
               </div>
+              <AnchorPrice amount={prices[p.priceId].anchor} align="center" />
             </div>
           ))}
         </div>
