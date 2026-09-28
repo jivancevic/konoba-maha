@@ -8,6 +8,8 @@
 npm run dev    # Dev server at localhost:3000
 npm run build  # Production build (Turbopack)
 npm run lint   # ESLint
+npm run cjenik        # Publish a new machine-readable price list (after any price change)
+npm run check:prices  # Parity check (also runs as prebuild)
 ```
 
 No test framework configured.
@@ -25,7 +27,7 @@ No test framework configured.
 
 `src/` only. Alias: `@/*` → `./src/*`.
 
-**Pages:** `app/[lang]/page.tsx` (landing, `lang`+`activeSection`), `app/[lang]/menu/page.tsx` (menu, `lang`+`tab`), `app/[lang]/cjenik/page.tsx` (price list), `app/layout.tsx` (fonts)
+**Pages:** `app/[lang]/page.tsx` (landing, `lang`+`activeSection`), `app/[lang]/menu/page.tsx` (menu, `lang`+`tab`), `app/[lang]/cjenik/page.tsx` (price list), `app/[lang]/layout.tsx` (fonts)
 
 **Components:** `Navbar`, `Hero`, `Story` (+ `SectionLabel`/`SectionHeading`/`BodyText`), `Food` (+ `CTAButton`), `MenuHighlights`, `Weddings`, `Contact` (+ `Footer`), `Reveal`; menu tabs: `menu/FoodTab`, `menu/WineTab`, `menu/TastingTab`, `menu/GroupTab` (+ `menu/AnchorPrice`)
 
