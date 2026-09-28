@@ -1,40 +1,12 @@
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Language } from '@/types';
-import type { CjenikManifestEntry } from '@/lib/cjenik';
+import { readManifest } from '@/lib/cjenik';
+import { translations } from '@/lib/translations';
 
 const LOCALES: string[] = ['en', 'hr'];
-
-const copy = {
-  en: {
-    title: 'Price list — Konoba Maha',
-    label: 'Konoba Maha · Korčula',
-    heading: 'Price List',
-    intro:
-      'The machine-readable price list of every service Konoba Maha charges for, published under the Croatian Government’s decision NN 101/2026. Every version stays available for at least 30 days.',
-    current: 'Current',
-    published: 'Published',
-    download: 'Download .csv',
-    back: '← Back to Home',
-    empty: 'No price list has been published yet.',
-  },
-  hr: {
-    title: 'Cjenik — Konoba Maha',
-    label: 'Konoba Maha · Korčula',
-    heading: 'Cjenik',
-    intro:
-      'Strojno čitljiv cjenik svih usluga koje Konoba Maha naplaćuje, objavljen sukladno Odluci Vlade RH (NN 101/2026). Svaka objavljena verzija ostaje dostupna najmanje 30 dana.',
-    current: 'Vrijedeći',
-    published: 'Objavljeno',
-    download: 'Preuzmi .csv',
-    back: '← Povratak na Početnu',
-    empty: 'Cjenik još nije objavljen.',
-  },
-};
 
 export async function generateMetadata({
   params,
@@ -42,7 +14,7 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  const c = copy[lang as Language] ?? copy.en;
+  const c = (translations[lang as Language] ?? translations.en).priceList;
 
   return {
     title: c.title,
@@ -59,16 +31,6 @@ export async function generateMetadata({
   };
 }
 
-/** Read at build time — the manifest is committed alongside the CSV files. */
-function readManifest(): CjenikManifestEntry[] {
-  const path = join(process.cwd(), 'public', 'cjenik', 'manifest.json');
-  try {
-    return JSON.parse(readFileSync(path, 'utf8')) as CjenikManifestEntry[];
-  } catch {
-    return [];
-  }
-}
-
 export default async function Page({
   params,
 }: {
@@ -77,8 +39,9 @@ export default async function Page({
   const { lang } = await params;
   if (!LOCALES.includes(lang)) notFound();
 
-  const c = copy[lang as Language];
-  const entries = [...readManifest()].reverse();
+  const c = translations[lang as Language].priceList;
+  // Read at build time — the manifest is committed alongside the CSV files. Newest first.
+  const entries = [...readManifest()].sort((a, b) => b.sequence - a.sequence);
   const dateFormat = new Intl.DateTimeFormat('hr-HR', {
     dateStyle: 'long',
     timeStyle: 'short',
@@ -190,6 +153,17 @@ export default async function Page({
                   }}
                 >
                   <div>
+                    <div
+                      className="uppercase mb-1"
+                      style={{
+                        fontFamily: 'var(--font-montserrat-sans)',
+                        fontSize: '0.5rem',
+                        letterSpacing: '0.2em',
+                        color: '#C0BBB5',
+                      }}
+                    >
+                      {c.published}
+                    </div>
                     <div className="flex items-center gap-3 flex-wrap mb-1">
                       <span
                         style={{
@@ -225,11 +199,12 @@ export default async function Page({
                         color: '#C0BBB5',
                       }}
                     >
-                      {c.published} · {String(entry.sequence).padStart(3, '0')}
+                      {c.sequence} {String(entry.sequence).padStart(3, '0')}
                     </div>
                   </div>
                   <a
                     href={`/cjenik/${encodeURIComponent(entry.file)}`}
+                    download={entry.file}
                     className="no-underline font-medium uppercase flex-shrink-0"
                     style={{
                       fontFamily: 'var(--font-montserrat-sans)',

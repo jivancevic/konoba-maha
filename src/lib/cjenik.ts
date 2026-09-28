@@ -9,6 +9,8 @@
  *
  * Relative `.ts` specifiers (not the `@/` alias) so Node can run this directly.
  */
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { menuPageData } from './menuData.ts';
 import { prices, ANCHOR_DATE_DISPLAY } from './prices.ts';
 import type { PriceId } from './prices.ts';
@@ -25,6 +27,32 @@ export interface CjenikManifestEntry {
   /** ISO timestamp of generation. */
   publishedAt: string;
   sequence: number;
+}
+
+export const CJENIK_DIR = join(process.cwd(), 'public', 'cjenik');
+export const MANIFEST_PATH = join(CJENIK_DIR, 'manifest.json');
+
+/** The published versions, in file order. Missing or unreadable manifest reads as "nothing published yet". */
+export function readManifest(): CjenikManifestEntry[] {
+  if (!existsSync(MANIFEST_PATH)) return [];
+  try {
+    return JSON.parse(readFileSync(MANIFEST_PATH, 'utf8')) as CjenikManifestEntry[];
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * The version in force. Keyed on the highest `sequence` rather than array position —
+ * the owner prunes entries older than 30 days by hand (docs/cjenik-postupak.md).
+ */
+export function latestManifestEntry(
+  manifest: CjenikManifestEntry[] = readManifest(),
+): CjenikManifestEntry | undefined {
+  return manifest.reduce<CjenikManifestEntry | undefined>(
+    (best, entry) => (best === undefined || entry.sequence > best.sequence ? entry : best),
+    undefined,
+  );
 }
 
 export interface PriceListRow {

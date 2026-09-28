@@ -1,4 +1,5 @@
 import type { Translations, Language } from '@/types';
+import { ANCHOR_DATE_DISPLAY } from '@/lib/prices';
 
 const en: Translations = {
   nav: {
@@ -60,7 +61,7 @@ const en: Translations = {
     subtext: "A curated selection from our à la carte menu.",
     cta: "Explore Our Full Menu",
     ctaSub: "Including Wine List, Tasting Menu & Group Events",
-    anchorNote: "Alongside each price we show the anchor price as of 10.09.2026., as required by the Croatian Government's price-control decision (NN 101/2026).",
+    anchorNote: `Alongside each price we show the anchor price as of ${ANCHOR_DATE_DISPLAY}, as required by the Croatian Government's price-control decision (NN 101/2026).`,
   },
   weddings: {
     label: "Weddings & Events",
@@ -112,6 +113,19 @@ const en: Translations = {
       submit: "Send Enquiry",
       success: "Thank you — we'll be in touch soon.",
     },
+  },
+  priceList: {
+    title: "Price list — Konoba Maha",
+    label: "Konoba Maha · Korčula",
+    heading: "Price List",
+    intro:
+      "The machine-readable price list of every service Konoba Maha charges for, published under the Croatian Government’s decision NN 101/2026. Every version stays available for at least 30 days.",
+    current: "Current",
+    published: "Published",
+    sequence: "Sequence",
+    download: "Download .csv",
+    back: "← Back to Home",
+    empty: "No price list has been published yet.",
   },
   footer: {
     partners: "Partners",
@@ -181,7 +195,7 @@ const hr: Translations = {
     subtext: "Odabrani specijaliteti iz našeg jelovnika.",
     cta: "Pogledaj Cijeli Jelovnik",
     ctaSub: "Uključuje vinsku kartu, degustacijski meni i grupne evente",
-    anchorNote: "Uz cijene je istaknuta i dodatna (sidrena) cijena na dan 10.09.2026., sukladno Odluci Vlade RH (NN 101/2026).",
+    anchorNote: `Uz cijene je istaknuta i dodatna (sidrena) cijena na dan ${ANCHOR_DATE_DISPLAY}, sukladno Odluci Vlade RH (NN 101/2026).`,
   },
   weddings: {
     label: "Vjenčanja i Eventi",
@@ -233,6 +247,19 @@ const hr: Translations = {
       submit: "Pošalji Upit",
       success: "Hvala — uskoro ćemo vas kontaktirati.",
     },
+  },
+  priceList: {
+    title: "Cjenik — Konoba Maha",
+    label: "Konoba Maha · Korčula",
+    heading: "Cjenik",
+    intro:
+      "Strojno čitljiv cjenik svih usluga koje Konoba Maha naplaćuje, objavljen sukladno Odluci Vlade RH (NN 101/2026). Svaka objavljena verzija ostaje dostupna najmanje 30 dana.",
+    current: "Vrijedeći",
+    published: "Objavljeno",
+    sequence: "Broj pohrane",
+    download: "Preuzmi .csv",
+    back: "← Povratak na Početnu",
+    empty: "Cjenik još nije objavljen.",
   },
   footer: {
     partners: "Partneri",

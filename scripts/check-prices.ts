@@ -12,10 +12,7 @@ import { join } from 'node:path';
 import type { MenuTabData } from '../src/types/index.ts';
 import { prices } from '../src/lib/prices.ts';
 import { menuPageData } from '../src/lib/menuData.ts';
-import { generateCsv, type CjenikManifestEntry } from '../src/lib/cjenik.ts';
-
-const CJENIK_DIR = join(process.cwd(), 'public', 'cjenik');
-const MANIFEST_PATH = join(CJENIK_DIR, 'manifest.json');
+import { CJENIK_DIR, generateCsv, latestManifestEntry } from '../src/lib/cjenik.ts';
 
 const problems: string[] = [];
 
@@ -68,10 +65,7 @@ for (const [id, price] of Object.entries(prices)) {
 }
 
 /* 4. The published Price List must still match the amounts. */
-const manifest: CjenikManifestEntry[] = existsSync(MANIFEST_PATH)
-  ? (JSON.parse(readFileSync(MANIFEST_PATH, 'utf8')) as CjenikManifestEntry[])
-  : [];
-const latest = manifest.at(-1);
+const latest = latestManifestEntry();
 
 if (!latest) {
   problems.push('No Price List has been published yet — run `npm run cjenik` and commit public/cjenik/.');

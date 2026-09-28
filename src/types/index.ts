@@ -110,6 +110,20 @@ export interface ContactTranslations {
   form: ContactFormTranslations;
 }
 
+/* ── Price list (/cjenik) ── */
+export interface PriceListTranslations {
+  title: string;
+  label: string;
+  heading: string;
+  intro: string;
+  current: string;
+  published: string;
+  sequence: string;
+  download: string;
+  back: string;
+  empty: string;
+}
+
 /* ── Footer ── */
 export interface FooterTranslations {
   partners: string;
@@ -127,6 +141,7 @@ export interface Translations {
   menu: MenuTranslations;
   weddings: WeddingsTranslations;
   contact: ContactTranslations;
+  priceList: PriceListTranslations;
   footer: FooterTranslations;
 }
 

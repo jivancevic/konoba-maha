@@ -19,6 +19,7 @@ No test framework configured.
 - **Tailwind CSS v4** — `@import "tailwindcss"` + `@theme inline {}`, not v3 directives
 - **Framer Motion** — scroll-reveal via `src/components/Reveal.tsx`
 - **Lucide React** — icons in Contact
+- **`allowImportingTsExtensions`** is on so `scripts/*.ts` run under Node natively (no build step); lib files those scripts import (`lib/cjenik.ts`, `lib/prices.ts`, `lib/menuData.ts`) use explicit relative `.ts` specifiers rather than the `@/` alias, which Node cannot resolve
 
 ## Architecture
 

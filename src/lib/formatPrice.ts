@@ -1,4 +1,4 @@
-import type { Language, PriceUnit } from '@/types';
+import type { PriceUnit } from '@/types';
 
 const eurFormatter = new Intl.NumberFormat('hr-HR', {
   style: 'currency',
@@ -25,12 +25,10 @@ export function formatPrice(amount: number, opts?: { whole?: boolean }): string 
   return f.format(amount).replace('\u00A0', ' ');
 }
 
-/* The `/ p.p.` and `/ kg` suffixes the peka prices used to carry inside their strings. */
-const UNIT_LABELS: Record<Language, Record<PriceUnit, string>> = {
-  en: { pp: '/ p.p.', kg: '/ kg' },
-  hr: { pp: '/ p.p.', kg: '/ kg' },
-};
+/* The `/ p.p.` and `/ kg` suffixes the peka prices used to carry inside their strings.
+   The menu has always used the same two labels in both languages. */
+const UNIT_LABELS: Record<PriceUnit, string> = { pp: '/ p.p.', kg: '/ kg' };
 
-export function unitLabel(unit: PriceUnit, lang: Language): string {
-  return UNIT_LABELS[lang][unit];
+export function unitLabel(unit: PriceUnit): string {
+  return UNIT_LABELS[unit];
 }

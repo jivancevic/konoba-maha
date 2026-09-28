@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { FoodSection, DishItem, DishTag, Language } from '@/types';
+import type { FoodSection, DishItem, DishTag } from '@/types';
 import { prices } from '@/lib/prices';
 import { formatPrice, unitLabel } from '@/lib/formatPrice';
 import Reveal from '@/components/Reveal';
@@ -9,10 +9,9 @@ import AnchorPrice from '@/components/menu/AnchorPrice';
 
 interface FoodTabProps {
   sections: FoodSection[];
-  lang: Language;
 }
 
-export default function FoodTab({ sections, lang }: FoodTabProps) {
+export default function FoodTab({ sections }: FoodTabProps) {
   return (
     <div style={{ maxWidth: 820, margin: '0 auto' }}>
       {sections.map((sec, si) => (
@@ -87,7 +86,7 @@ export default function FoodTab({ sections, lang }: FoodTabProps) {
                         style={{ fontFamily: 'var(--font-montserrat-sans)', fontSize: '0.88rem', color: '#9B8060' }}
                       >
                         {formatPrice(prices[item.priceId].current)}
-                        {item.unit && ` ${unitLabel(item.unit, lang)}`}
+                        {item.unit && ` ${unitLabel(item.unit)}`}
                       </div>
                       <AnchorPrice amount={prices[item.priceId].anchor} />
                     </div>
@@ -116,7 +115,7 @@ export default function FoodTab({ sections, lang }: FoodTabProps) {
                 </div>
                 <div>
                   {sec.items.map((item, ii) => (
-                    <DishRow key={ii} item={item} lang={lang} last={ii === sec.items.length - 1} />
+                    <DishRow key={ii} item={item} last={ii === sec.items.length - 1} />
                   ))}
                 </div>
               </div>
@@ -128,7 +127,7 @@ export default function FoodTab({ sections, lang }: FoodTabProps) {
   );
 }
 
-function DishRow({ item, lang, last }: { item: DishItem; lang: Language; last: boolean }) {
+function DishRow({ item, last }: { item: DishItem; last: boolean }) {
   const [hov, setHov] = useState(false);
   const tags = item.tags ?? [];
 
@@ -161,7 +160,7 @@ function DishRow({ item, lang, last }: { item: DishItem; lang: Language; last: b
           style={{ fontFamily: 'var(--font-montserrat-sans)', fontSize: '0.88rem', color: '#1A1A1A' }}
         >
           {formatPrice(prices[item.priceId].current)}
-          {item.unit && ` ${unitLabel(item.unit, lang)}`}
+          {item.unit && ` ${unitLabel(item.unit)}`}
         </div>
         <AnchorPrice amount={prices[item.priceId].anchor} />
       </div>

@@ -6,10 +6,8 @@
  * fact, entered once and never derived from `current`. See ADR-0003.
  */
 
-/** The Anchor Date in Croatian notation — shown to guests in both languages. */
+/** The Anchor Date in Croatian notation — shown to guests in both languages, and in the Price List. */
 export const ANCHOR_DATE_DISPLAY = '10.09.2026.';
-/** The Anchor Date as ISO — used by the machine-readable Price List. */
-export const ANCHOR_DATE_ISO = '2026-09-10';
 
 export interface Price {
   /** EUR, current amount. */

@@ -10,20 +10,18 @@
  */
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { generateCsv, type CjenikManifestEntry } from '../src/lib/cjenik.ts';
+import {
+  CJENIK_DIR,
+  MANIFEST_PATH,
+  generateCsv,
+  latestManifestEntry,
+  readManifest,
+} from '../src/lib/cjenik.ts';
 
 /** Prescribed pattern: <vrsta objekta>_<adresa>_<oznaka objekta>_<broj pohrane>_<datum i vrijeme> */
 const VENUE_KIND = 'konoba';
 const ADDRESS = 'Vrsi bb 20275 Žrnovo';
 const PREMISES = '1';
-
-const CJENIK_DIR = join(process.cwd(), 'public', 'cjenik');
-const MANIFEST_PATH = join(CJENIK_DIR, 'manifest.json');
-
-function readManifest(): CjenikManifestEntry[] {
-  if (!existsSync(MANIFEST_PATH)) return [];
-  return JSON.parse(readFileSync(MANIFEST_PATH, 'utf8')) as CjenikManifestEntry[];
-}
 
 /** Generation time in Europe/Zagreb. `.` instead of `:` in the time — `:` is not a legal filename character everywhere. */
 function timestampParts(now: Date): { date: string; time: string } {
@@ -51,7 +49,7 @@ function buildFilename(sequence: number, now: Date): string {
 
 const csv = generateCsv();
 const manifest = readManifest();
-const latest = manifest.at(-1);
+const latest = latestManifestEntry(manifest);
 
 if (latest && existsSync(join(CJENIK_DIR, latest.file))) {
   const published = readFileSync(join(CJENIK_DIR, latest.file), 'utf8');
@@ -62,7 +60,8 @@ if (latest && existsSync(join(CJENIK_DIR, latest.file))) {
 }
 
 const now = new Date();
-const sequence = manifest.length + 1;
+// Never reuse a sequence number, even after the owner prunes old entries.
+const sequence = (latest?.sequence ?? 0) + 1;
 const file = buildFilename(sequence, now);
 
 mkdirSync(CJENIK_DIR, { recursive: true });

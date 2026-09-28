@@ -35,7 +35,7 @@ export default function MenuClient({ lang }: { lang: Language }) {
   }, [tab]);
 
   const tabContent: React.ReactNode[] = [
-    <FoodTab key="food" sections={d.food.sections} lang={lang} />,
+    <FoodTab key="food" sections={d.food.sections} />,
     <WineTab key="wine" sections={d.wine.sections} />,
     <TastingTab key="tasting" data={d.tasting} />,
     <GroupTab key="group" data={d.group} />,
