@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/check-prices.ts",
     "build": "next build",
+    "cjenik": "node scripts/generate-cjenik.ts",
+    "check:prices": "node scripts/check-prices.ts",
     "start": "next start",
     "lint": "eslint"
   },

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import type { Language } from '@/types';
 import { translations } from '@/lib/translations';
 
@@ -53,6 +54,18 @@ export default function Footer({ lang }: FooterProps) {
           >
             {t.location}
           </span>
+          <Link
+            href={`/${lang}/cjenik`}
+            className="uppercase no-underline"
+            style={{
+              fontFamily: 'var(--font-montserrat-sans)',
+              fontSize: '0.55rem',
+              letterSpacing: '0.2em',
+              color: '#9B9390',
+            }}
+          >
+            {t.priceList}
+          </Link>
         </div>
         <span
           style={{
