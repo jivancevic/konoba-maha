@@ -1,7 +1,10 @@
 'use client';
 
 import type { TastingMenu } from '@/types';
+import { prices } from '@/lib/prices';
+import { formatPrice } from '@/lib/formatPrice';
 import Reveal from '@/components/Reveal';
+import AnchorPrice from '@/components/menu/AnchorPrice';
 
 interface TastingTabProps {
   data: TastingMenu;
@@ -140,7 +143,7 @@ export default function TastingTab({ data }: TastingTabProps) {
                   marginBottom: '0.25rem',
                 }}
               >
-                {p.value}
+                {formatPrice(prices[p.priceId].current, { whole: true })}
               </div>
               <div
                 style={{
@@ -152,6 +155,7 @@ export default function TastingTab({ data }: TastingTabProps) {
               >
                 {p.sub}
               </div>
+              <AnchorPrice amount={prices[p.priceId].anchor} align="center" />
             </div>
           ))}
         </div>

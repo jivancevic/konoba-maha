@@ -1,14 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import type { FoodSection, DishItem, DishTag } from '@/types';
+import type { FoodSection, DishItem, DishTag, Language } from '@/types';
+import { prices } from '@/lib/prices';
+import { formatPrice, unitLabel } from '@/lib/formatPrice';
 import Reveal from '@/components/Reveal';
+import AnchorPrice from '@/components/menu/AnchorPrice';
 
 interface FoodTabProps {
   sections: FoodSection[];
+  lang: Language;
 }
 
-export default function FoodTab({ sections }: FoodTabProps) {
+export default function FoodTab({ sections, lang }: FoodTabProps) {
   return (
     <div style={{ maxWidth: 820, margin: '0 auto' }}>
       {sections.map((sec, si) => (
@@ -77,11 +81,15 @@ export default function FoodTab({ sections }: FoodTabProps) {
                         </div>
                       )}
                     </div>
-                    <div
-                      className="font-semibold flex-shrink-0"
-                      style={{ fontFamily: 'var(--font-montserrat-sans)', fontSize: '0.88rem', color: '#9B8060' }}
-                    >
-                      {item.price}
+                    <div className="flex-shrink-0 text-right">
+                      <div
+                        className="font-semibold"
+                        style={{ fontFamily: 'var(--font-montserrat-sans)', fontSize: '0.88rem', color: '#9B8060' }}
+                      >
+                        {formatPrice(prices[item.priceId].current)}
+                        {item.unit && ` ${unitLabel(item.unit, lang)}`}
+                      </div>
+                      <AnchorPrice amount={prices[item.priceId].anchor} />
                     </div>
                   </div>
                 ))}
@@ -108,7 +116,7 @@ export default function FoodTab({ sections }: FoodTabProps) {
                 </div>
                 <div>
                   {sec.items.map((item, ii) => (
-                    <DishRow key={ii} item={item} last={ii === sec.items.length - 1} />
+                    <DishRow key={ii} item={item} lang={lang} last={ii === sec.items.length - 1} />
                   ))}
                 </div>
               </div>
@@ -120,7 +128,7 @@ export default function FoodTab({ sections }: FoodTabProps) {
   );
 }
 
-function DishRow({ item, last }: { item: DishItem; last: boolean }) {
+function DishRow({ item, lang, last }: { item: DishItem; lang: Language; last: boolean }) {
   const [hov, setHov] = useState(false);
   const tags = item.tags ?? [];
 
@@ -147,11 +155,15 @@ function DishRow({ item, last }: { item: DishItem; last: boolean }) {
           </div>
         )}
       </div>
-      <div
-        className="font-semibold flex-shrink-0 pt-[2px]"
-        style={{ fontFamily: 'var(--font-montserrat-sans)', fontSize: '0.88rem', color: '#1A1A1A' }}
-      >
-        {item.price}
+      <div className="flex-shrink-0 pt-[2px] text-right">
+        <div
+          className="font-semibold"
+          style={{ fontFamily: 'var(--font-montserrat-sans)', fontSize: '0.88rem', color: '#1A1A1A' }}
+        >
+          {formatPrice(prices[item.priceId].current)}
+          {item.unit && ` ${unitLabel(item.unit, lang)}`}
+        </div>
+        <AnchorPrice amount={prices[item.priceId].anchor} />
       </div>
     </div>
   );

@@ -60,6 +60,7 @@ const en: Translations = {
     subtext: "A curated selection from our à la carte menu.",
     cta: "Explore Our Full Menu",
     ctaSub: "Including Wine List, Tasting Menu & Group Events",
+    anchorNote: "Alongside each price we show the anchor price as of 10.09.2026., as required by the Croatian Government's price-control decision (NN 101/2026).",
   },
   weddings: {
     label: "Weddings & Events",
@@ -116,6 +117,7 @@ const en: Translations = {
     partners: "Partners",
     rights: "© 2026 Konoba Maha. All rights reserved.",
     location: "Korčula Island, Croatia",
+    priceList: "Price list",
   },
 };
 
@@ -179,6 +181,7 @@ const hr: Translations = {
     subtext: "Odabrani specijaliteti iz našeg jelovnika.",
     cta: "Pogledaj Cijeli Jelovnik",
     ctaSub: "Uključuje vinsku kartu, degustacijski meni i grupne evente",
+    anchorNote: "Uz cijene je istaknuta i dodatna (sidrena) cijena na dan 10.09.2026., sukladno Odluci Vlade RH (NN 101/2026).",
   },
   weddings: {
     label: "Vjenčanja i Eventi",
@@ -235,6 +238,7 @@ const hr: Translations = {
     partners: "Partneri",
     rights: "© 2026 Konoba Maha. Sva prava pridržana.",
     location: "Otok Korčula, Hrvatska",
+    priceList: "Cjenik",
   },
 };
 

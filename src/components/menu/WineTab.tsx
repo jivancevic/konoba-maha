@@ -2,7 +2,10 @@
 
 import { useState } from 'react';
 import type { WineSection, WineItem } from '@/types';
+import { prices } from '@/lib/prices';
+import { formatPrice } from '@/lib/formatPrice';
 import Reveal from '@/components/Reveal';
+import AnchorPrice from '@/components/menu/AnchorPrice';
 
 interface WineTabProps {
   sections: WineSection[];
@@ -12,7 +15,7 @@ export default function WineTab({ sections }: WineTabProps) {
   return (
     <div style={{ maxWidth: 820, margin: '0 auto' }}>
       {sections.map((sec, si) => {
-        const hasGlass = sec.items.some((i) => i.glass != null);
+        const hasGlass = sec.items.some((i) => i.glassId != null);
         return (
           <Reveal key={si} delay={si * 50}>
             <div className="mb-12">
@@ -119,12 +122,12 @@ function WineRow({ item, last, hasGlass }: { item: WineItem; last: boolean; hasG
             style={{
               fontFamily: 'var(--font-montserrat-sans)',
               fontSize: '0.82rem',
-              fontWeight: item.glass ? 500 : 300,
-              color: item.glass ? '#1A1A1A' : '#C0BBB5',
+              fontWeight: item.glassId ? 500 : 300,
+              color: item.glassId ? '#1A1A1A' : '#C0BBB5',
               width: '3.5rem',
             }}
           >
-            {item.glass ?? '—'}
+            {item.glassId ? formatPrice(prices[item.glassId].current) : '—'}
           </span>
         )}
         <span
@@ -136,8 +139,20 @@ function WineRow({ item, last, hasGlass }: { item: WineItem; last: boolean; hasG
             width: '3.5rem',
           }}
         >
-          {item.bottle}
+          {formatPrice(prices[item.bottleId].current)}
         </span>
+      </div>
+
+      {/* Anchor prices — one line for the whole row, glass first when there is one */}
+      <div style={{ width: '100%' }}>
+        {item.glassId ? (
+          <AnchorPrice
+            amount={prices[item.glassId].anchor}
+            secondAmount={prices[item.bottleId].anchor}
+          />
+        ) : (
+          <AnchorPrice amount={prices[item.bottleId].anchor} />
+        )}
       </div>
     </div>
   );
