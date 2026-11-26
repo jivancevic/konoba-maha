@@ -234,9 +234,12 @@ export default function Navbar({ lang, activeSection }: NavbarProps) {
           >
             {t.lang}
           </button>
-          <button
-            onClick={() => scrollTo('contact')}
-            className="cursor-pointer border-none"
+          <a
+            href={RESERVE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center justify-center no-underline"
             style={{
               background: '#1A1A1A',
               color: '#F5F5F0',
@@ -244,11 +247,12 @@ export default function Navbar({ lang, activeSection }: NavbarProps) {
               fontSize: '0.6rem',
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
-              padding: '14px',
+              minHeight: '52px',
+              padding: '0 28px',
             }}
           >
             {t.reserve}
-          </button>
+          </a>
         </div>
       </div>
     </>
