@@ -26,9 +26,10 @@ Both must print `200`.
 Roll back first, diagnose after.
 
 ```bash
-vercel rollback
+vercel ls konoba-maha
+vercel rollback <deployment-url>
 ```
 
-This puts the previous production deployment back on https://konobamaha.com within seconds. To pick a specific one, pass its URL from `vercel ls konoba-maha`: `vercel rollback <deployment-url>`.
+Take `<deployment-url>` from the last good `Production` row of `vercel ls konoba-maha` (the one before the bad merge). This puts that deployment back on https://konobamaha.com within seconds.
 
 Then open a revert PR for the bad commit, so `main` matches production again. After `vercel rollback`, Vercel stops auto-promoting new `main` builds until a deployment is promoted again: once the revert has built, run `vercel promote <deployment-url>` on it.
