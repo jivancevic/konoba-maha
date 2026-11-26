@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { Language } from '@/types';
 import { translations } from '@/lib/translations';
+import { RESERVE_URL } from '@/lib/links';
 
 interface HeroProps {
   lang: Language;
@@ -88,7 +89,7 @@ export default function Hero({ lang }: HeroProps) {
             transition: 'opacity 0.9s ease 0.6s, transform 0.9s ease 0.6s',
           }}
         >
-          <HeroBtn primary href="https://bookmeatable.com/restaurants/konoba-maha-8" newTab>
+          <HeroBtn primary href={RESERVE_URL} newTab>
             {t.cta}
           </HeroBtn>
           <HeroBtn href={`/${lang}/menu`}>{t.ctaMenu}</HeroBtn>
