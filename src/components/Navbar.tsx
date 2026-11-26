@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import type { Language } from '@/types';
 import { translations } from '@/lib/translations';
+import { RESERVE_URL } from '@/lib/links';
 
 interface NavbarProps {
   lang: Language;
@@ -113,7 +114,7 @@ export default function Navbar({ lang, activeSection }: NavbarProps) {
 
           {/* Reserve CTA — desktop */}
           <a
-            href="https://bookmeatable.com/restaurants/konoba-maha-8"
+            href={RESERVE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:inline-flex items-center no-underline transition-opacity duration-300 hover:opacity-80"

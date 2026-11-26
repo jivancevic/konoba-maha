@@ -39,7 +39,7 @@ No test framework configured.
 
 - **Colors:** `#F5F5F0` cream · `#EFEFEA` cream-alt · `#1A1A1A` charcoal · `#9B8060` gold · `#6B6560` muted
 - **Fonts:** `--font-playfair-display` (headings/italic) · `--font-montserrat-sans` (body/labels/uppercase)
-- **Reserve URL:** `https://bookmeatable.com/restaurants/konoba-maha-8`
+- **Reserve URL:** `RESERVE_URL` in `src/lib/links.ts` (i-host)
 - **Brochure:** `t.weddings.brochureFile` resolves correct `/documents/` path per locale
 
 ## Work plan

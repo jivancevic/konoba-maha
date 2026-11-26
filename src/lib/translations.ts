@@ -1,5 +1,6 @@
 import type { Translations, Language } from '@/types';
 import { ANCHOR_DATE_DISPLAY } from '@/lib/prices';
+import { RESERVE_URL } from '@/lib/links';
 
 const en: Translations = {
   nav: {
@@ -103,7 +104,7 @@ const en: Translations = {
     phone: "+385 91 605 1207",
     email: "konobamaha@gmail.com",
     reserve: "Make a Reservation",
-    reserveUrl: "https://bookmeatable.com/restaurants/konoba-maha-8",
+    reserveUrl: RESERVE_URL,
     form: {
       name: "Full Name",
       email: "Email Address",
@@ -237,7 +238,7 @@ const hr: Translations = {
     phone: "+385 91 605 1207",
     email: "konobamaha@gmail.com",
     reserve: "Rezervirajte Stol",
-    reserveUrl: "https://bookmeatable.com/restaurants/konoba-maha-8",
+    reserveUrl: RESERVE_URL,
     form: {
       name: "Puno Ime",
       email: "Email Adresa",
